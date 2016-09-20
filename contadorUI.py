@@ -10,6 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import contador
 import os
 
+
 class Ui_Contador(object):
 
     def setupUi(self, Contador):
@@ -87,7 +88,6 @@ class Ui_Contador(object):
         self.lineEdit.setText(fname)
 
     def mostra_tabela(self, histograma):
-        verticalHeaders = []
         tabela = self.tabela
         tabela.setRowCount(len(histograma))
 
@@ -112,7 +112,7 @@ class Ui_Contador(object):
         self.grafico_pizza.setPixmap(QtGui.QPixmap(""))
         print(caminho)
         if (caminho != '' and os.path.isdir(caminho)):
-            contador.conta_arquivos(caminho, histograma)
+            contador.varre_diretorio(caminho, histograma)
             contador.cria_grafico(histograma)
             pizza = QtGui.QPixmap("pie.svg").scaledToWidth(550, mode=QtCore.Qt.SmoothTransformation)
             barras_h = QtGui.QPixmap("barh.svg").scaledToWidth(550, mode=QtCore.Qt.SmoothTransformation)
@@ -123,7 +123,6 @@ class Ui_Contador(object):
             self.tabWidget.setVisible(True)
         else:
             self.reseta_tela()
-
 
 if __name__ == "__main__":
     import sys
